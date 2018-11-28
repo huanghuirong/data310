@@ -10,7 +10,17 @@ const Homepage = (resolve) => {
 	})
 }
 
+const Football = (resolve) => {
+	import('../components/Homepage/Football.vue').then((module) => {
+		resolve(module)
+	})
+}
 
+const Footballmatch = (resolve) => {
+	import('../components/Homepage/Footballmatch.vue').then((module) => {
+		resolve(module)
+	})
+}
 
 export default new Router({
 	// mode: 'history',
@@ -23,6 +33,14 @@ export default new Router({
 		{
 			path: '/homepage',
 			component: Homepage
+		},
+		{
+			path: '/football',
+			component: Football
+		},
+		{
+			path: '/footballmatch',
+			component: Footballmatch
 		},
 //		{
 //			path: '/shopcar',

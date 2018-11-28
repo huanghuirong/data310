@@ -32,30 +32,60 @@
 		</div>
 		<!--内容-->
 		<div class="main">
-			<!--广告-->
-			<!--<div></div>
-			<div></div>-->
 			<div class="mainCon">
 				<!--轮播-->
 				<div class="mainScroll">
-					<template>
-						<div class="block">
-							<span class="demonstration">默认 Hover 指示器触发</span>
-							<el-carousel height="150px">
-								<el-carousel-item v-for="item in 4" :key="item">
-									<h3>{{ item }}</h3>
-								</el-carousel-item>
-							</el-carousel>
-						</div>
-					</template>
+					<!--<template>-->
+					<el-carousel height="400px">
+						<el-carousel-item v-for="item in carouselImg" :key="item">
+							<img :src="item" alt="" />
+						</el-carousel-item>
+					</el-carousel>
+					<!--</template>-->
 				</div>
-				<div></div>
+				<!--资讯-->
+				<div class="mainNews">
+					<div class="mainNewsLists" v-for="item in 4" :key="item">
+						<!--分类-->
+						<div class="mainNewsListsTitle">
+							<div class="mainNewsListsTitleLeft">
+								<span></span> 奖报
+							</div>
+							<div class="mainNewsListsTitleRight">MORE</div>
+						</div>
+						<!--内容-->
+						<ul class="mainNewsListsContent">
+							<li><span></span>足球世界变化快，妖人小将大步迈，今天要说的是来自于克罗地亚的95</li>
+							<li><span></span>印度羽球赛李雪芮28分钟速胜东道主选手 晋级十六强</li>
+							<li><span></span>高尔夫世界杯周四开赛 李昊桐吴阿顺出战欲创佳绩</li>
+							<li><span></span>C罗晒图疑似回应金球奖评选 尤文官方力挺：你是史诗</li>
+							<li><span></span>黄紫昌拄拐亮相中超颁奖典礼 一年打遍各级国字号</li>
+						</ul>
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<!--底部-->
 		<div id="footer">
 			<v-foot></v-foot>
 		</div>
+		<!--广告-->
+		<div class="adLeft">
+			<div class="adPosition">
+				<div>广告</div>
+				<img src="../../../build/logo.png" />
+			</div>
+
+		</div>
+		<div class="adRight">
+			<div class="adPosition">
+				<div>广告</div>
+				<img src="../../../build/logo.png" />
+			</div>
+
+		</div>
+
 	</div>
 </template>
 <script>
@@ -66,6 +96,10 @@
 				haveLoginShow: false, //是否登录
 				navList: ['首页', '足球', '篮球', '比分直播', '比赛结果', '论坛', '关于我们'], //导航
 				navIndex: "0",
+				carouselImg: [
+					"https://lggst1.lagougongshe.com/281107702913037598.png",
+					"https://lggst1.lagougongshe.com/242733150717600971.jpg",
+				], //轮播图片
 			}
 		},
 		props: {
@@ -80,6 +114,9 @@
 		methods: {
 			handleSelect(index) {
 				this.navIndex = index;
+				if(index == 1) {
+					this.$router.push('/football')
+				}
 			}
 		},
 		components: {
@@ -182,6 +219,7 @@
 			width: 100%;
 			text-align: center;
 			margin-top: 4px;
+			margin-bottom: 20px;
 			border-bottom: 4px solid #FF5A00;
 			.navLists {
 				width: 1160px;
@@ -207,32 +245,156 @@
 		/*内容*/
 		.main {
 			width: 100%;
+			margin-bottom: 260px;
 			text-align: center;
 			.mainCon {
 				width: 1160px;
 				margin: 0 auto;
 				.mainScroll {
-					.el-carousel__item h3 {
-						color: #475669;
-						font-size: 18px;
-						opacity: 0.75;
-						line-height: 300px;
-						margin: 0;
+					margin-bottom: 20px;
+					.el-carousel__item img {
+						width: 100%;
+						height: 100%;
 					}
-					.el-carousel__item:nth-child(2n) {
-						background-color: #99a9bf;
+				}
+				.mainNews {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					flex-wrap: wrap;
+					.mainNewsLists {
+						width: 49%;
+						border: 1px solid #E5E5E5;
+						margin-bottom: 20px;
+						padding: 30px 30px 20px 20px;
+						box-sizing: border-box;
+						.mainNewsListsTitle {
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							font-size: 18px;
+							color: #333333;
+							font-weight: 600;
+							margin-bottom: 15px;
+							.mainNewsListsTitleLeft {
+								display: flex;
+								align-items: center;
+								span {
+									display: block;
+									width: 4px;
+									height: 16px;
+									background: #FF5A00;
+									margin-right: 5px;
+								}
+							}
+							.mainNewsListsTitleRight {
+								width: 48px;
+								height: 22px;
+								line-height: 22px;
+								text-align: center;
+								border: 1px solid #C4C4C4;
+								box-sizing: border-box;
+								font-size: 12px;
+								color: #666666;
+							}
+							.mainNewsListsTitleRight:hover {
+								color: #FFFFFF;
+								background: #FF5A00;
+								border: 1px solid #FF5A00;
+							}
+						}
+						.mainNewsListsContent {
+							text-align: left;
+							li {
+								display: flex;
+								align-items: center;
+								margin-bottom: 10px;
+								font-size: 16px;
+								span {
+									display: inline-block;
+									width: 6px;
+									height: 6px;
+									border-radius: 50%;
+									background: #C4C4C4;
+									margin-right: 5px;
+								}
+							}
+							li:nth-last-child(1) {
+								margin-bottom: 0px;
+							}
+							li:hover {
+								color: #FF5A00;
+								span {
+									background: #FF5A00;
+								}
+							}
+						}
 					}
-					.el-carousel__item:nth-child(2n+1) {
-						background-color: #d3dce6;
+					mainNewsLists:nth-child(2n+1) {
+						margin-right: 20px;
+						.el-carousel__item h3 {
+							color: #475669;
+							font-size: 18px;
+							opacity: 0.75;
+							line-height: 300px;
+							margin: 0;
+						}
+						.el-carousel__item:nth-child(2n) {
+							background-color: #99a9bf;
+						}
+						.el-carousel__item:nth-child(2n+1) {
+							background-color: #d3dce6;
+						}
 					}
 				}
 			}
 		}
+		/*底部*/
 		#footer {
 			position: fixed;
 			bottom: 0px;
 			left: 0px;
 			right: 0px;
+			z-index: 10;
+		}
+		/*广告*/
+		.adLeft {
+			position: fixed;
+			top: 230px;
+			left: 10px;
+			.adPosition {
+				position: relative;
+				div {
+					position: absolute;
+					top: 0px;
+					left: 0px;
+					z-index: 10;
+				}
+				img {
+					display: block;
+					width: 166px;
+					height: 416px;
+				}
+			}
+		}
+		.adRight {
+			position: fixed;
+			top: 230px;
+			right: 10px;
+			.adPosition {
+				position: relative;
+				div {
+					position: absolute;
+					top: 0px;
+					left: 0px;
+					z-index: 10;
+				}
+				img {
+					display: block;
+					width: 166px;
+					height: 416px;
+				}
+			}
 		}
 	}
 </style>
