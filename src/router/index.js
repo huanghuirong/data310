@@ -3,25 +3,42 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
-
+//首页
 const Homepage = (resolve) => {
-	import('../components/Homepage/Homepage.vue').then((module) => {
+	import('../components/Homepage/homepage.vue').then((module) => {
 		resolve(module)
 	})
 }
-
+//足球比赛
 const Football = (resolve) => {
-	import('../components/Homepage/Football.vue').then((module) => {
+	import('../components/Homepage/football.vue').then((module) => {
 		resolve(module)
 	})
 }
-
+//足球比赛详情
 const Footballmatch = (resolve) => {
-	import('../components/Homepage/Footballmatch.vue').then((module) => {
+	import('../components/Homepage/footballmatch.vue').then((module) => {
 		resolve(module)
 	})
 }
-
+//篮球比赛
+const Basketball = (resolve) => {
+	import('../components/Homepage/basketball.vue').then((module) => {
+		resolve(module)
+	})
+}
+//篮球比赛详情
+const Basketballmatch = (resolve) => {
+	import('../components/Homepage/basketballmatch.vue').then((module) => {
+		resolve(module)
+	})
+}
+//关于我们
+const Aboutus = (resolve) => {
+	import('../components/Homepage/aboutus.vue').then((module) => {
+		resolve(module)
+	})
+}
 export default new Router({
 	// mode: 'history',
 	routes: [{
@@ -42,21 +59,34 @@ export default new Router({
 			path: '/footballmatch',
 			component: Footballmatch
 		},
-//		{
-//			path: '/shopcar',
-//			component: Shopcar,
-//			children: [{
-//				path: '/shopcar/shoporder',
-//				component: Shoporder,
-//				children: [{
-//					path: '/shopcar/shoporder/addresslist',
-//					component: AddressList,
-//					children: [{
-//						path: '/shopcar/shoporder/addresslist/writeaddress',
-//						component: WriteAddress
-//					}, ]
-//				}, ]
-//			}]
-//		},
+
+		{
+			path: '/basketball',
+			component: Basketball
+		},
+		{
+			path: '/basketballmatch',
+			component: Basketballmatch
+		},
+		{
+			path: '/aboutus',
+			component: Aboutus
+		},
+		//		{
+		//			path: '/shopcar',
+		//			component: Shopcar,
+		//			children: [{
+		//				path: '/shopcar/shoporder',
+		//				component: Shoporder,
+		//				children: [{
+		//					path: '/shopcar/shoporder/addresslist',
+		//					component: AddressList,
+		//					children: [{
+		//						path: '/shopcar/shoporder/addresslist/writeaddress',
+		//						component: WriteAddress
+		//					}, ]
+		//				}, ]
+		//			}]
+		//		},
 	]
 })

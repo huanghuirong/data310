@@ -1,35 +1,24 @@
 <template>
 	<div id="homepage">
 		<!--头部-->
-		<div class="header">
-			<div class="headAll">
-				<div class="headAllLeft">
-					<img src="./image/logo.png" alt="" />
-				</div>
-				<div class="headAllRight">
-					<div class="headCustom">
-						<img src="./image/custom.png" alt="" />
-						<span>客服电话：400-860-93932</span>
-					</div>
-					<div class="headLogin">
-
-						<div class="headHaveLogin" v-if="haveLoginShow">
-							<img src="./image/headportrait.png" alt="" />
-							<span>用户名</span>
-						</div>
-						<div class="headNoLogin" v-else>登录，体验智能推荐</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<v-head @clickLogin="clickLogin()"></v-head>
 		<!--导航-->
 		<div class="nav">
 			<div class="navLists">
 				<div class="navItems" v-for="(item,index) in navList " @click="handleSelect(index)">
-					<div :class="{'activeNav':navIndex == index}">{{item}}</div>
+					<div class="navItem" @mouseover="selectShow(index)" :class="{'activeNav':navIndex == index}">{{item}}</div>
+					<div class="liveScore" v-if="index==3 && liveScoreShow">
+						<div>足球比分直播</div>
+						<div>篮球比分直播</div>
+					</div>
+					<div class="matchResult" v-if="index==4 && matchresultShow">
+						<div>足球比赛结果</div>
+						<div>篮球比赛结果</div>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<!--内容-->
 		<div class="main">
 			<div class="mainCon">
@@ -85,14 +74,22 @@
 			</div>
 
 		</div>
+		<v-login v-show="loginShow" @clickLoginClose="clickLoginClose()" @clickGoRegister="clickGoRegister()" @clickForget="clickForget()" ></v-login>
+		<v-register v-show="registerShow" @clickRegisterClose="clickRegisterClose()"></v-register>
+		<v-resting v-show="restingShow" @clickRestingClose="clickRestingClose()"></v-resting>
 
 	</div>
 </template>
 <script>
+	import head from '../../common/templates/head/head'
 	import foot from '../../common/templates/foot/foot'
+	import login from '../../common/templates/login/login'
+	import resting from '../../common/templates/resting/resting'
+	import register from '../../common/templates/register/register'
 	export default {
 		data() {
 			return {
+				activeIndex: '1',
 				haveLoginShow: false, //是否登录
 				navList: ['首页', '足球', '篮球', '比分直播', '比赛结果', '论坛', '关于我们'], //导航
 				navIndex: "0",
@@ -100,27 +97,80 @@
 					"https://lggst1.lagougongshe.com/281107702913037598.png",
 					"https://lggst1.lagougongshe.com/242733150717600971.jpg",
 				], //轮播图片
+				liveScoreShow: false, //比分直播
+				matchresultShow: false, //比赛结果
+				loginShow: '', //登录显示
+				registerShow: '', //立即注册显示
+				restingShow: '', //重置密码显示
+				//				phoneNum:'123',//登录手机号和
 			}
 		},
 		props: {
 
 		},
 		created() {
-
 		},
 		watch: {
 
 		},
 		methods: {
+			//			头部点击登录
+			clickLogin() {
+				console.log("red")
+				this.loginShow = true;
+			},
+			//			点击关闭登录窗口
+			clickLoginClose() {
+				this.loginShow = false;
+			},
+			//			点击登录页面的立即注册
+			clickGoRegister() {
+				this.loginShow = false;
+				this.registerShow = true;
+			},
+			//			点击关闭注册窗口
+			clickRegisterClose() {
+				this.registerShow = false;
+			},
+
+			//			忘记密码点击跳转重置密码
+			clickForget() {
+				this.loginShow = false;
+				this.restingShow = true;
+			},
+			//			关闭重置按钮窗口
+			clickRestingClose() {
+				this.restingShow = false;
+			},
+
 			handleSelect(index) {
 				this.navIndex = index;
-				if(index == 1) {
+				if(index == 0) {
+					this.$router.push('/homepage')
+				} else if(index == 1) {
 					this.$router.push('/football')
+				} else if(index == 2) {
+					this.$router.push('/basketball')
+				}else if(index == 6) {
+					this.$router.push('/aboutus')
+				}
+			},
+			//		导航下拉框显示
+			selectShow(index) {
+				if(index == 3) {
+					this.liveScoreShow = !this.liveScoreShow
+				} else if(index == 4) {
+					console.log(index)
+					this.matchresultShow = !this.matchresultShow
 				}
 			}
 		},
 		components: {
-			"v-foot": foot
+			"v-head": head,
+			"v-foot": foot,
+			"v-login": login,
+			"v-resting": resting,
+			"v-register": register
 		},
 		computed: {
 
@@ -144,76 +194,6 @@
 			padding: 0px;
 			margin: 0px;
 		}
-		/*头部*/
-		.header {
-			color: #333;
-			text-align: center;
-			height: 100px;
-			box-shadow: 0px 0px 5px -2px #001529;
-			.headAll {
-				width: 1160px;
-				margin: 0 auto;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				.headAllLeft,
-				.headAllRight {
-					height: 100px;
-				}
-				.headAllLeft {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					img {
-						width: auto;
-						height: 30px;
-					}
-				}
-				.headAllRight {
-					display: flex;
-					flex-direction: column;
-					align-items: flex-end;
-					justify-content: center;
-					.headCustom {
-						font-size: 12px;
-						color: #383838;
-						display: flex;
-						align-items: center;
-						img {
-							width: 16px;
-							height: auto;
-							margin-right: 3px;
-						}
-					}
-					.headLogin {
-						.headNoLogin {
-							width: 175px;
-							height: 40px;
-							margin-top: 12px;
-							background: #FF5A00;
-							border-radius: 4px;
-							padding: 8px 9px;
-							box-sizing: border-box;
-							color: #FFFFFF;
-							font-size: 16px;
-						}
-						.headHaveLogin {
-							display: flex;
-							align-items: center;
-							justify-content: center;
-							margin-top: 20px;
-							font-size: 13px;
-							color: #000000;
-							img {
-								width: 24px;
-								height: 24px;
-								margin-right: 8px;
-							}
-						}
-					}
-				}
-			}
-		}
 		/*导航*/
 		.nav {
 			width: 100%;
@@ -230,14 +210,60 @@
 				justify-content: center;
 				.navItems {
 					font-size: 16px;
-					div {
+					.navItem {
 						margin: 0px 20px;
 						padding: 20px 16px 23px 16px;
 						box-sizing: border-box;
 					}
+					.navItem:hover {
+						color: #FF5A00;
+					}
+					div:nth-child(4) {
+						/*position: relative;*/
+					}
 					.activeNav {
 						background: #FF5A00;
 						color: #FFFFFF;
+					}
+					.liveScore {
+						position: absolute;
+						top: 160px;
+						z-index: 10;
+						font-size: 14px;
+						color: #606266;
+						background: #FFFFFF;
+						padding: 9px 1px;
+						box-sizing: border-box;
+						margin-left: 24px;
+						border: 1px solid #E4E7ED;
+						div {
+							height: 34px;
+							line-height: 34px;
+						}
+						div:hover {
+							background: #FF5A00;
+							color: #FFFFFF;
+						}
+					}
+					.matchResult {
+						position: absolute;
+						top: 160px;
+						z-index: 10;
+						font-size: 14px;
+						color: #606266;
+						background: #FFFFFF;
+						padding: 9px 1px;
+						box-sizing: border-box;
+						margin-left: 24px;
+						border: 1px solid #E4E7ED;
+						div {
+							height: 34px;
+							line-height: 34px;
+						}
+						div:hover {
+							background: #FF5A00;
+							color: #FFFFFF;
+						}
 					}
 				}
 			}

@@ -123,7 +123,6 @@
 		<div id="footer">
 			<v-foot></v-foot>
 		</div>
-		
 	</div>
 </template>
 <script>

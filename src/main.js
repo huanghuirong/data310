@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import Element from 'element-ui'//引入element
 import '../theme/index.css'
-import 'element-ui/lib/theme-chalk/index.css'//引入element
+//import 'element-ui/lib/theme-chalk/index.css'//引入element
 //import {server} from './common/service/http-service'//引入API
 
 
