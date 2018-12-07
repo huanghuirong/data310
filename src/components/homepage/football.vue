@@ -70,36 +70,36 @@
 							</div>
 
 							<!--表格-->
-							<el-table :border="false" style="width: 100%" :span-method="objectSpanMethod">
-								<el-table-column align="center" prop="date" label="赛事编号">
+							<el-table :data="tableData6" :default-sort="{prop:'matchnum'}" :border="false" style="width: 100%" :span-method="objectSpanMethod">
+								<el-table-column sortable align="center" width="100" prop="matchnum" label="赛事编号">
 								</el-table-column>
-								<el-table-column align="center" prop="name" label="赛事">
+								<el-table-column align="center" prop="match" label="赛事">
 								</el-table-column>
-								<el-table-column align="center" prop="address" label="开赛时间">
+								<el-table-column align="center" prop="matchtime" label="开赛时间">
 								</el-table-column>
-								<el-table-column align="center" prop="date" label="即时天气">
+								<el-table-column align="center" prop="weather" label="即时天气">
 								</el-table-column>
-								<el-table-column align="center" prop="name" label="主队VS客队">
+								<el-table-column align="center" prop="matchteam" label="主队VS客队">
 								</el-table-column>
-								<el-table-column align="center" prop="address" label="让球">
+								<el-table-column sortable align="center" prop="giveball" label="让球">
 								</el-table-column>
-								<el-table-column align="center" prop="address" label="胜">
+								<el-table-column sortable align="center" prop="win" label="胜">
 								</el-table-column>
-								<el-table-column align="center" prop="date" label="平">
+								<el-table-column sortable align="center" prop="drawn" label="平">
 								</el-table-column>
-								<el-table-column align="center" prop="name" label="负">
+								<el-table-column sortable align="center" prop="lost" label="负">
 								</el-table-column>
-								<el-table-column halign="center" prop="name" label="数据">
+								<el-table-column align="center" prop="date" label="数据">
 								</el-table-column>
-								<el-table-column align="center" prop="address" label="支持率">
-									<el-table-column align="center" prop="address" label="胜">
+								<el-table-column sortable align="center" prop="support" label="支持率">
+									<el-table-column align="center" prop="supportwin" label="胜">
 									</el-table-column>
-									<el-table-column align="center" prop="date" label="平">
+									<el-table-column align="center" prop="supportdrawn" label="平">
 									</el-table-column>
-									<el-table-column align="center" prop="name" label="负">
+									<el-table-column align="center" prop="supportlost" label="负">
 									</el-table-column>
 								</el-table-column>
-								<el-table-column align="center" prop="date" label="重要提示">
+								<el-table-column align="center" prop="important" label="重要提示">
 								</el-table-column>
 							</el-table>
 						</el-tab-pane>
@@ -123,7 +123,7 @@
 		<div id="footer">
 			<v-foot></v-foot>
 		</div>
-		
+
 	</div>
 </template>
 <script>
@@ -159,9 +159,89 @@
 				checkedMoney: true, //奖金选择按钮
 
 				checkList: ['胜平负'],
-				liveScoreShow: false,//比分直播
-				matchresultShow: false,//比赛结果
+				liveScoreShow: false, //比分直播
+				matchresultShow: false, //比赛结果
 
+				tableData6: [{
+						matchnum: '',
+						match: '',
+						matchtime: '',
+						weather: '',
+						matchteam: '',
+						giveball: '',
+						win: '',
+						drawn: '',
+						lost: '',
+						date: '',
+						supportwin: '',
+						supportdrawn: '',
+						supportlost: '',
+						important: ''
+					}, {
+						matchnum: '12987122',
+						match: '王小虎',
+						matchtime: '234',
+						weather: '3.2',
+						matchteam: 10,
+						giveball: 12,
+						win: '12987123',
+						drawn: '王小虎',
+						lost: '165',
+						date: '4.43',
+						supportwin: '12',
+						supportdrawn: '12',
+						supportlost: '12',
+						important: '1'
+					},
+					{
+						matchnum: '12987122',
+						match: '王小虎',
+						matchtime: '234',
+						weather: '3.2',
+						matchteam: 10,
+						giveball: 12,
+						win: '12987123',
+						drawn: '王小虎',
+						lost: '165',
+						date: '4.43',
+						supportwin: '12',
+						supportdrawn: '12',
+						supportlost: '12',
+						important: '1'
+					},
+					{
+						matchnum: '12987122',
+						match: '王小虎',
+						matchtime: '234',
+						weather: '3.2',
+						matchteam: 10,
+						giveball: 12,
+						win: '12987123',
+						drawn: '王小虎',
+						lost: '165',
+						date: '4.43',
+						supportwin: '12',
+						supportdrawn: '12',
+						supportlost: '12',
+						important: '1'
+					},
+					{
+						matchnum: '12987122',
+						match: '王小虎',
+						matchtime: '234',
+						weather: '3.2',
+						matchteam: 10,
+						giveball: 12,
+						win: '12987123',
+						drawn: '王小虎',
+						lost: '165',
+						date: '4.43',
+						supportwin: '12',
+						supportdrawn: '12',
+						supportlost: '12',
+						important: '1'
+					}
+				]
 			}
 		},
 		props: {
@@ -186,9 +266,9 @@
 					this.$router.push('/homepage')
 				} else if(index == 1) {
 					this.$router.push('/football')
-				}else if(index == 2) {
+				} else if(index == 2) {
 					this.$router.push('/basketball')
-				}else if(index == 6) {
+				} else if(index == 6) {
 					this.$router.push('/aboutus')
 				}
 			},
@@ -235,6 +315,17 @@
 				columnIndex
 			}) {
 				console.log(columnIndex)
+				console.log(rowIndex)
+				if(columnIndex === 0) {
+					console.log("河滨")
+//					console.log(this.spanArr[rowIndex])
+//					const _row = this.spanArr[rowIndex];
+//					const _col = _row > 0 ? 1 : 0;
+//					return {
+//						rowspan: _row,
+//						colspan: _col
+//					}
+				}
 
 			}
 

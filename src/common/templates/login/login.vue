@@ -5,6 +5,7 @@
 				<i class="el-icon-close"></i>
 			</div>
 			<div class="loginName">登录</div>
+			<div class="tips">{{message}}</div>
 			<div class="loginPhone">
 				<i class="el-icon-mobile-phone"></i>
 				<div class="loginPhoneWord" >手机号</div>
@@ -34,6 +35,7 @@
 	export default {
 		data() {
 			return {
+				message:'',//提示消息
 				phoneNum:'',
 				password:'',
 			}
@@ -62,13 +64,9 @@
 			},
 			login(){
 				if(this.phoneNum == '') {
-					console.log('请输入手机号')
-//					this.message = '请输入手机号'
-//					this.$refs.toptip.show()
+					this.message = '请您输入手机号'
 				} else if(this.password == '') {
-					console.log("请输入密码")
-//					this.message = '请输入密码'
-//					this.$refs.toptip.show()
+					this.message = '请您输入密码'
 				} else {
 					this.logPhone()
 				}
@@ -77,9 +75,7 @@
 			logPhone() {
 				let re = /^1\d{10}$/
 				if(!re.test(this.phoneNum)) {
-					console.log("请输入正确的11位手机号码")
-//					this.message = '请输入正确的11位手机号码'
-//					this.$refs.toptip.show()
+					this.message = '请您输入正确的11位手机号码'
 					return
 				} else {
 					console.log("success")
@@ -132,6 +128,12 @@
 				font-size: 20px;
 				color: #333333;
 				margin-bottom: 20px;
+			}
+			.tips{
+				text-align: left;
+				margin:5px;
+				color:#fc4343;
+				font-size:12px;
 			}
 			.loginPhone {
 				display: flex;

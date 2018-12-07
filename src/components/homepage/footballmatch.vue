@@ -108,7 +108,7 @@
 								</el-table>
 							</div>
 							<div style="margin-top:20px;">
-								<el-table :data="tableData3" :header-cell-style="tableHeaderColor" :span-method="getSpanArr" style="width: 100%">
+								<el-table :data="tableData3" :default-sort = "{prop: 'date', order: 'descending'}" :header-cell-style="tableHeaderColor" :span-method="getSpanArr" style="width: 100%">
 									<el-table-column header-align="center" label="竞彩让球胜平负(+1)">
 										<el-table-column align="center" prop="name" label="胜">
 										</el-table-column>

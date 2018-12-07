@@ -39,6 +39,12 @@ const Aboutus = (resolve) => {
 		resolve(module)
 	})
 }
+//测试
+const Test = (resolve) => {
+	import('../components/Homepage/test.vue').then((module) => {
+		resolve(module)
+	})
+}
 export default new Router({
 	// mode: 'history',
 	routes: [{
@@ -71,6 +77,10 @@ export default new Router({
 		{
 			path: '/aboutus',
 			component: Aboutus
+		},
+		{
+			path: '/test',
+			component: Test
 		},
 		//		{
 		//			path: '/shopcar',

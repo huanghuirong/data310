@@ -23,14 +23,21 @@
 		<div class="aboutusBg">
 			<img src="./image/aboutusbg.png" alt="" />
 			<div class="aboutusWord">
-				123
+				<div class="aboutUsTitle">
+					我们的团队
+					
+				</div>
+				<div class="aboutUsLine"></div>
+				<div class="aboutUsText">
+					我们（蚂蚁金服体验技术部）是一支兼具设计视角和工程视角的团队，服务蚂蚁金服上百个中后台系统，主打产品 Ant Design 服务全球 100 万设计师和工程师，是西湖区学院路西侧最具影响力的设计语言。欢迎来这里和我们一起打造优雅高效的人机设计/研发体系。
+				</div>
 			</div>
 		</div>
 		<!--底部-->
 		<div id="footer">
 			<v-foot></v-foot>
 		</div>
-		
+
 		<!--<v-login v-show="loginShow" @clickLoginClose="clickLoginClose()" @clickGoRegister="clickGoRegister()" @clickForget="clickForget()" ></v-login>
 		<v-register v-show="registerShow" @clickRegisterClose="clickRegisterClose()"></v-register>
 		<v-resting v-show="restingShow" @clickRestingClose="clickRestingClose()"></v-resting>-->
@@ -50,19 +57,18 @@
 				haveLoginShow: false, //是否登录
 				navList: ['首页', '足球', '篮球', '比分直播', '比赛结果', '论坛', '关于我们'], //导航
 				navIndex: "0",
-				
+
 			}
 		},
 		props: {
 
 		},
-		created() {
-		},
+		created() {},
 		watch: {
 
 		},
 		methods: {
-//			导航切换
+			//			导航切换
 			handleSelect(index) {
 				this.navIndex = index;
 				if(index == 0) {
@@ -71,7 +77,7 @@
 					this.$router.push('/football')
 				} else if(index == 2) {
 					this.$router.push('/basketball')
-				}else if(index == 6) {
+				} else if(index == 6) {
 					this.$router.push('/aboutus')
 				}
 			},
@@ -188,13 +194,44 @@
 				}
 			}
 		}
-		.aboutusBg{
-			width:100%;
-			height:auto;
-			margin-bottom:120px;
-			img{
-				width:100%;
-				height:auto;
+		.aboutusBg {
+			width: 100%;
+			height: auto;
+			margin-bottom: 116px;
+			position: relative;
+			img {
+				width: 100%;
+				height: auto;
+			}
+			.aboutusWord {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background: #FFFFFF;
+				border-radius: 10px;
+				padding: 32px 67px;
+				box-sizing: border-box;
+				div {
+					text-align: center;
+				}
+				.aboutUsTitle {
+					font-size: 20px;
+					color: #333333;
+					margin-bottom:5px;
+				}
+				.aboutUsLine {
+					width: 30px;
+					height: 2px;
+					background: #000000;
+					margin: 0 auto;
+				}
+				.aboutUsText {
+					font-size: 14px;
+					color: #666666;
+					line-height: 30px;
+					margin-top: 35px;
+				}
 			}
 		}
 		/*底部*/
@@ -205,6 +242,5 @@
 			right: 0px;
 			z-index: 10;
 		}
-
 	}
 </style>
