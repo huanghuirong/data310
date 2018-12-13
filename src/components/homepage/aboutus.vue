@@ -57,7 +57,8 @@
 				haveLoginShow: false, //是否登录
 				navList: ['首页', '足球', '篮球', '比分直播', '比赛结果', '论坛', '关于我们'], //导航
 				navIndex: "0",
-
+				liveScoreShow: false, //比分直播
+				matchresultShow: false, //比赛结果
 			}
 		},
 		props: {

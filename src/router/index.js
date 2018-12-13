@@ -45,6 +45,11 @@ const Test = (resolve) => {
 		resolve(module)
 	})
 }
+const Testcompany = (resolve) => {
+	import('../components/Homepage/testcompany.vue').then((module) => {
+		resolve(module)
+	})
+}
 export default new Router({
 	// mode: 'history',
 	routes: [{
@@ -81,6 +86,10 @@ export default new Router({
 		{
 			path: '/test',
 			component: Test
+		},
+		{
+			path: '/testcompany',
+			component: Testcompany
 		},
 		//		{
 		//			path: '/shopcar',
